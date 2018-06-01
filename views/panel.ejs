@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title><%= title %> | 資意成楓建美景 - 2018 建成楓景聯合電資暑訓</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <script src="https://unpkg.com/sweetalert2@7.0.6/dist/sweetalert2.all.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/js/bootstrap.min.js"></script>
+    <style>
+        .agreement{
+            color: #337ab7;
+            text-decoration: none;
+            cursor:pointer;
+        }
+        .agreement:hover{
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <blockquote>
+        <p>
+            報名人數：<%= Data.length %>
+            <br>
+        </p>
+    </blockquote>
+    <div class'table-responsive'>
+        <table class='table table-striped'>
+            <thead>
+            <tr>
+                <th>學員姓名</th>
+                <th>性別</th>
+                <th>尺寸</th>
+                <th>就讀國中</th>
+                <th>家長姓名</th>
+                <th>連絡電話</th>
+                <th>葷素習慣</th>
+                <th>Email</th>
+                <th>身分證字號</th>
+                <th>生日</th>
+                <th>交通方式</th>
+                <th>緊急聯絡</th>
+                <th>同意書</th>
+                <th>報名時間</th>
+                <th>備註</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% Data.forEach(function(val, index, arr){ %>
+            <tr>
+                <td><%= val.fullname %></td>
+                <td><%= val.gender %></td>
+                <td><%= val.size %></td>
+                <td><%= val.school %></td>
+                <td><%= val.parentName %></td>
+                <td><%= val.phone %></td>
+                <td><%= val.eat %></td>
+                <td><a target="_blank" href="mailto:<%= val.email %>"><%= val.email %></a></td>
+                <td><%= val.id %></td>
+                <td><%= val.birthday %></td>
+                <td><%= val.transport %></td>
+                <td><%= val.emergencyContact %></td>
+                <td class='agreement'><%= val.parentalConsent %></td>
+                <td><%= val.time %></td>
+                <td><pre style="background-color:transparent;border:0;padding:0px;max-height:100px;"><%= val.message %></pre></td>
+            </tr>
+            <% }); %>
+            </tbody>
+        </table>
+        <script src="assets/js/idVerify.js"></script>
+        <script>
+            $(".agreement").click(function(){
+                var userName = $(this).parent().children().first().html();
+                if($(this).html().split('.').pop() == "pdf"){
+                    swal({title: userName,html: '<a href="upload/'+$(this).html()+'">PDF Link</a><br><iframe src="upload/'+$(this).html()+'" style="width:90%;min-height:250px;"></iframe>'});
+                } else {
+                    var source = 'upload/'+$(this).html();
+                    swal({title: userName,imageUrl: source});
+                }
+            });
+            $("tbody tr").each((i,e) => {
+                var child = $(e).children()[8];
+                var id = $(child).html();
+                if ( !idVerify(id) ) {
+                    $(child).css('background-color','red');
+                }
+            });
+        </script>
+</body>
+</html>

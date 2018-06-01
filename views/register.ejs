@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+        <%- include('head'); %>
+        <!-- Snackbar -->
+        <link rel="stylesheet" href="https://cdn.rawgit.com/FezVrasta/snackbarjs/master/themes-css/material.css">
+        <link rel="stylesheet" href="https://cdn.rawgit.com/FezVrasta/snackbarjs/master/dist/snackbar.min.css">
+	</head>
+	<body>
+		<!-- Wrapper -->
+		<div id="wrapper">
+            <!-- Header -->
+            <%- include('header'); %>
+            <!-- Main -->
+            <div class="main reg">
+                <div class="inner">
+                    <h1>報名須知</h1>
+                    <p>感謝各位同學報名此次的活動！本營隊一律採用線上報名，請在報名時間內，完整填寫報名表單。
+                    報名成功後我們將於七月初公佈錄取名單，請留意 E-mail 信箱、粉專以及網站公告！</p>
+                    <div class="row">
+                        <div class="6u 12u$(xsmall)">
+                            <h2>招收對象</h2>
+                            <ul>
+                                <li>目前正在就讀國中的同學，並以國三生為優先。</li>
+                            </ul>
+                            <h2>報名日程</h2>
+                            <ul>
+                                <li>報名時間：5/19（六） ~ &nbsp;7/4（三）</li>
+                                <li>錄取名單公佈：7/5（四）</li>
+                                <li>營隊活動：7/23（一）~ &nbsp;7/29（日）<br>
+                                每日活動以 8:00 AM - 5:00 PM 為主，供應午餐，<br>
+                                （活動日程表請參見<a href="https://cscamp.codes/schedule">課程資訊</a>，保留異動空間）</li>
+                            </ul>
+                            <h2>報名流程</h2>
+                            <ol>
+                                <li>列印<a href="https://cscamp.codes/file/parental_consent.docx">家長同意書</a>，簽名後拍照/掃描</li>
+                                <li>線上填寫報名表單，上傳檔案</li>
+                                <li>名單公佈：7/5（四）</li>
+                                <li>依照公告指示完成繳費</li>
+                                <li>公佈已繳費名單，確認完成報名流程</li>
+                            </ol>
+                            <h2>活動費用</h2>
+                            <ul>
+                                <li>全程參與為&nbsp;<a>$2000</a>&nbsp;元，如果部分參加，將會按情形退費。</li>
+                                <li>匯款方式請參考我們寄出的<strong>錄取通知</strong>和<strong>匯款通知</strong>！</li>
+                            </ul>
+                        </div>
+                        <div class="6u$ 12u$(xsmall)">
+                            <h2>遇到問題?</h2>
+                            <p>請參照&nbsp;<a href="https://cscamp.codes/qna">Q&amp;A</a>&nbsp;，或是洽詢&nbsp;<a target="_blank" href="https://www.facebook.com/%E8%B3%87%E6%84%8F%E6%88%90%E6%A5%93-%E9%A9%9A%E5%BB%BA%E7%BE%8E%E6%99%AF-2018-%E5%9B%9B%E6%A0%A1%E8%81%AF%E5%90%88%E6%9A%91%E8%A8%93-386189141887289/">粉專</a>&nbsp;!</p>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <% if (reg == "pending") { %>
+                <div class="inner" style="padding-bottom: 2em; display: flex;">
+                            <a class="reg button" style="margin: auto;">報名即將開始</a>
+                        </div>
+                <% } else if (reg == "start") { %>
+                <div class="inner" style="padding-bottom: 2em; display: flex;">
+                    <a class="reg button" style="margin: auto;">填寫報名表</a>
+                </div>
+                <div class="inner" id="formContainer" style="display: none;">
+                    <form id="reg_form" action="https://cscamp.codes/register" method="POST">
+                        <div class="row uniform" style="width: 80%;margin: auto;">
+                            <!-- "fullname,gender,size,school,phone,parentName,transport,email,partner,id,birthday,emergencyContact,parentalConsent,agree,message" -->
+                            <div class="first 6u 12u$(xsmall)">
+                                <input name="fullname" id="fullname" type="text" required>
+                                <label for="fullname">全名</label>
+                            </div>
+                            <div class="3u 12u$(xsmall)">
+                                <div class="select-wrapper">
+                                    <select name="gender" id="gender" required>
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                        <option value="其他">其他</option>
+                                    </select>
+                                </div>
+                                <label for="size">性別</label>
+                            </div>
+                            <div class="3u$ 12u$(xsmall)">
+                                <div class="select-wrapper">
+                                    <select name="size" id="size" required>
+                                        <option value="S">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                    </select>
+                                </div>
+                                <label for="size">訓服尺寸</label>
+                            </div>
+                            <div class="first 6u 12u$(xsmall)">
+                                <input id="school" name="school" type="text">
+                                <label for="school">就讀國中</label>
+                            </div>
+                            <div class="6u$ 12u$(xsmall)">
+                                <input id="phone" name="phone" type="tel" required>
+                                <label for="phone">連絡電話</label>
+                            </div>
+                            <div class="first 6u 12u$(xsmall)">
+                                <input id="parentName" name="parentName" type="text" required>
+                                <label for="parentName">家長姓名</label>
+                            </div>
+                            <div class="6u$ 12u$(xsmall)">
+                                <input id="transport" name="transport" type="text" placeholder="(家長接送/自行前往)" required>
+                                <label for="transport">交通方式</label>
+                            </div>
+                            <div class="first 12u$">
+                                <div class="select-wrapper">
+                                    <select name="eat" id="eat" required>
+                                        <option value="葷">葷</option>
+                                        <option value="素">素</option>
+                                    </select>
+                                </div>
+                                <label for="size">葷素習慣</label>
+                            </div>
+                            <div class="first 12u$">
+                                <input id="email" name="email" type="email" required>
+                                <label for="email">Email</label>
+                            </div>
+                            <h2>保險資料</h2>
+                            <hr>
+                            <div class="first 6u 12u$(xsmall)">
+                                <input id="id" name="id" type="text" pattern="[A-Z]{1}[1-2]{1}[0-9]{8}" required>
+                                <label for="id">身分證字號</label>
+                            </div>
+                            <div class="6u$ 12u$(xsmall)">
+                                <input id="birthday" name="birthday" type="text" data-toggle="datepicker" required>
+                                <label for="birthday">生日</label>
+                            </div>
+                            <div class="first 12u$">
+                                <input type="text" name="emergencyContact" id="emergencyContact" required>
+                                <label for="emergencyContact">緊急聯絡人/關係/電話</label>
+                            </div>
+                            <div class="first 6u 12u$(xsmall)">
+                                <input id="parentalConsent" name="parentalConsent" type="file" required style="margin:5px 0 0 5px;">
+                                <label for="parentalConsent">繳交家長同意書 <a target="_blank" href="https://cscamp.codes/file/parental_consent.docx">（下載）</a>（請拍下家長同意書上傳）</label>
+                            </div>
+                            <div class="6u$ 12u$(xsmall)">
+                                <input id="agree" name="agree" type="checkbox" required>
+                                <label for="agree">我已詳細閱讀報名須知，並且願意遵守。</label>
+                            </div>
+                            <div class="first 12u$">
+                                <div class="textarea-wrapper">
+                                    <textarea name="message" id="message" rows="3"></textarea>
+                                </div>
+                                <label for="message">備註</label>
+                            </div>
+                            <input type="hidden" name="time" value="">
+                            <div class="first 12u$">
+                                <ul class="actions">
+                                    <li><input value="送出" class="special" type="submit"></li>
+                                    <li><input value="清除重填" type="reset"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <% } else if (reg == "end") { %>
+                <div class="inner" style="padding-bottom: 2em; display: flex;">
+                    <a class="reg button" style="margin: auto;">報名截止</a>
+                </div>
+                <% } %>
+            </div>
+			<!-- Footer -->
+			<%- include('footer'); %>
+		</div>
+
+		<!-- Scripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/skel.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+        <script src="assets/js/main.js"></script>
+        <!-- Snackbar -->
+        <script src="https://cdn.rawgit.com/FezVrasta/snackbarjs/master/dist/snackbar.min.js"></script>
+        <% if (reg == "start") { %>
+        <!-- Date picker -->
+        <link rel="stylesheet" href="assets/css/datepicker.css" />
+        <script src="assets/js/datepicker.js"></script>
+        <script src="assets/js/datepicker-CN.js"></script>
+        <script>
+            $('[data-toggle="datepicker"]').datepicker({
+                language: 'zh-CN',
+                'date': '2001/08/01',
+                'endDate': 'now',
+            });
+            $('.reg.button').click( () => {
+                $('#formContainer').show();
+                $('.reg.button').hide();
+            });
+        </script>
+        <script src="assets/js/idVerify.js"></script>
+        <script src="assets/js/form.js"></script>
+        <% } %>
+	</body>
+</html>

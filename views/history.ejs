@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<%- include('head'); %>
+	</head>
+	<body>
+		<!-- Wrapper -->
+		<div id="wrapper">
+			<!-- Header -->
+			<%- include('header'); %>
+			<!-- Main -->
+			<div class="main gallery">
+				<div class="inner">
+					<h1>歷年精華</h1>
+					<% ImageFiles.forEach(function(val, index, arr){ %>
+					<div class="inb">
+						<a href="<%= val %>" data-fancybox="images">
+							<img class="lazy" src="<%= val %>" style="height:200px; width: 266px;" />
+						</a>
+					</div>
+					<% }); %>
+				</div>
+			</div>
+			<!-- Footer -->
+			<%- include('footer'); %>
+		</div>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="assets/js/main.js"></script>
+		<!-- FancyBox (photo viewer) -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.js"></script>
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.css" />
+		<!-- Lazy Load -->
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.8/jquery.lazy.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.8/jquery.lazy.plugins.min.js"></script>
+		<style>
+			.inb{
+				display: inline-block;
+			}
+			a[data-fancybox]{
+				border:none;
+			}
+		</style>
+		<script>
+		$(function(){
+			$("img.lazy").lazy({
+			effect: 'fadeIn',
+			effectTime: 2500,
+			threhlod: 0
+			});
+		});
+		</script>
+	</body>
+</html>
