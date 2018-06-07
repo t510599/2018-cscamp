@@ -53,8 +53,7 @@ router.get('/history', function(req, res, next) {
 router.put('/register', upload.single('parentalConsent'), function(req, res, next) {
     console.log(req.body);
     writeRegLog(JSON.stringify(req.body));
-    var MongoClient = require('mongodb').MongoClient,
-        assert = require('assert');
+    var MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://localhost:27017";
     var param1 = req.body;
     if (!param1.fullname         ||
@@ -75,10 +74,11 @@ router.put('/register', upload.single('parentalConsent'), function(req, res, nex
         MongoClient.connect(url, function(err, client) {
             var db = client.db('2018-cscamp');
             db.collection('register').insert(param1, function(err, doc) {
-                if (err)
-                res.status(500).send('Error');
-                else
-                res.send('Success');
+                if (err) {
+                    res.status(500).send('Error');
+                } else {
+                    res.send('Success');
+                } 
             });
         });
     }
