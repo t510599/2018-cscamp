@@ -92,7 +92,7 @@
                                         <option value="XL">XL</option>
                                     </select>
                                 </div>
-                                <label for="size">訓服尺寸</label>
+                                <label for="size">訓服尺寸 <a href="file/clothes_size.jpg" target="_blank">（對照表）</a></label>
                             </div>
                             <div class="first 6u 12u$(xsmall)">
                                 <input id="school" name="school" type="text">
@@ -190,10 +190,10 @@
                 'date': '2001/08/01',
                 'endDate': 'now',
             });
-            $('.reg.button').click( () => {
-                $('#formContainer').show();
-                $('.reg.button').hide();
-            });
+            document.getElementsByClassName('reg button')[0].onclick = function() {
+                document.getElementById('formContainer').style.display = "block";
+                document.getElementsByClassName('reg button')[0].style.display = "none";
+            };
         </script>
         <script src="assets/js/idVerify.js"></script>
         <script src="assets/js/form.js"></script>
