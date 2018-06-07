@@ -21,4 +21,14 @@ npm start
 * `reg`
   * `startTime` - 報名開始時間
   * `endTime` - 報名截止時間
-* `port`
+* `port`  
+
+`subjects.json` - the course list and description
+```json
+{
+  "id": "id here",
+  "title": "Course Name",
+  "text": "Course Description",
+  "img": "Course image (put in images/)"
+}
+```
