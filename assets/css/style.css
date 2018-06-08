@@ -149,7 +149,7 @@ form div > input:required + label::before,form div > div.select-wrapper + label:
     content: "*";
     margin-right: 4px;
 }
-/* previous neighor selector end */
+/* previous neighbor selector end */
 input[type="checkbox"] + label::before {
     content: '' !important;
 }
