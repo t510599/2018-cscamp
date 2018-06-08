@@ -64,7 +64,7 @@
                 <td><%= val.emergencyContact %></td>
                 <td class='agreement'><%= val.parentalConsent %></td>
                 <td><%= val.time %></td>
-                <td><pre style="background-color:transparent;border:0;padding:0px;max-height:100px;"><%= val.message %></pre></td>
+                <td><pre style="background-color:transparent;border:0;padding:0px;max-height:100px;max-width: 400px;"><%= val.message %></pre></td>
             </tr>
             <% }); %>
             </tbody>
@@ -73,11 +73,15 @@
         <script>
             $(".agreement").click(function(){
                 var userName = $(this).parent().children().first().html();
-                if($(this).html().split('.').pop() == "pdf"){
-                    swal({title: userName,html: '<a href="upload/'+$(this).html()+'">PDF Link</a><br><iframe src="upload/'+$(this).html()+'" style="width:90%;min-height:250px;"></iframe>'});
-                } else {
+                var fileType = $(this).html().split('.').pop().toLowerCase();
+                var imageType = ['jpeg','png','jpg','gif','webp','webm','tiff','bmp'];
+                if (imageType.indexOf(fileType) > -1) {
                     var source = 'upload/'+$(this).html();
                     swal({title: userName,imageUrl: source});
+                } else if (fileType === "pdf") {
+                    swal({title: userName,html: '<a href="upload/'+$(this).html()+'">PDF Link</a><br><iframe src="upload/'+$(this).html()+'" style="width:90%;min-height:250px;"></iframe>'});
+                } else {
+                    swal({title: userName,html: '<a href="upload/'+$(this).html()+'">File Link</a></iframe>'});
                 }
             });
             $("tbody tr").each((i,e) => {
