@@ -52,6 +52,10 @@ router.get('/history', function(req, res, next) {
     });
 });
 router.put('/register', upload.single('parentalConsent'), function(req, res, next) {
+    if (config.reg() != "start") {
+        res.status(403).send("!start");
+        return null;
+    }
     console.log(req.body);
     writeRegLog(JSON.stringify(req.body));
     var MongoClient = require('mongodb').MongoClient;
@@ -92,19 +96,19 @@ router.put('/register', upload.single('parentalConsent'), function(req, res, nex
     }
 });
 var authorize = function(req, res, next){
-function unauth(res){
-    res.set("WWW-Authenticate", "Basic realm=\"Authorization Required\"");
-    return res.status('401').send("Authorization Required");
-}
-var user = basicAuth(req);
-if(!user || !user.name || !user.pass){
-    return unauth(res);
-}
-if(sha256(sha256(user.name)) === '8da02532d45e8453c2af4f6f358d6a2efcfd583db0c388e9464e61903c9572db' && sha256(sha256(user.pass)) === '66d44b8d09f8dc5cbfe76b77caa96f72c00509d07850f3cc0316667c9d84f3d3'){
-    return next();
-} else {
-    return unauth(res);
-}
+    function unauth(res){
+        res.set("WWW-Authenticate", "Basic realm=\"Authorization Required\"");
+        return res.status('401').send("Authorization Required");
+    }
+    var user = basicAuth(req);
+    if(!user || !user.name || !user.pass){
+        return unauth(res);
+    }
+    if(sha256(sha256(user.name)) === '8da02532d45e8453c2af4f6f358d6a2efcfd583db0c388e9464e61903c9572db' && sha256(sha256(user.pass)) === '66d44b8d09f8dc5cbfe76b77caa96f72c00509d07850f3cc0316667c9d84f3d3'){
+        return next();
+    } else {
+        return unauth(res);
+    }
 };
 router.get('/security', authorize , function(req, res, next){
     var MongoClient = require('mongodb').MongoClient;

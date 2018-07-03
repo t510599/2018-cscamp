@@ -63,18 +63,29 @@ $('#reg_form').submit((e) => {
 
         btn.val('已報名'); // disabled button
         $('input[type="reset"]').hide();
-    }).fail(() => {
-        if(!failSnackbar){ // fail snackbar
-            failSnackbar = $.snackbar({
-                content: "傳送失敗 QWQ 請再試一次，或是洽詢粉專。",
-                timeout: 3000
-            });
+    }).fail((jqXHR) => {
+        if(jqXHR.status == 403) {
+            if(!failSnackbar){ // fail snackbar
+                failSnackbar = $.snackbar({
+                    content: "未在報名期間!",
+                    timeout: 3000
+                });
+            } else {
+                $(failSnackbar).snackbar('show');
+            }
         } else {
-            $(failSnackbar).snackbar('show');
+            if(!failSnackbar){ // fail snackbar
+                failSnackbar = $.snackbar({
+                    content: "傳送失敗 QWQ 請再試一次，或是洽詢粉專。",
+                    timeout: 3000
+                });
+            } else {
+                $(failSnackbar).snackbar('show');
+            }
+    
+            if(btn.hasClass('disabled')) { // enable the button
+                btn.removeClass('disabled');   
+            } 
         }
-
-        if(btn.hasClass('disabled')) { // enable the button
-            btn.removeClass('disabled');   
-        } 
     });
 });
