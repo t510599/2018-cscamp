@@ -21,10 +21,10 @@
 </head>
 <body>
     <blockquote>
-        <p>
-            報名人數：<%= Data.length %>
-            <br>
-        </p>
+        <p>報名人數：<%= Data.length %></p>
+        <% if (reg == "end ") {%>
+        <a href="/api/getRegisterData">Download Data</a>
+        <% } %>
     </blockquote>
     <div class'table-responsive'>
         <table class='table table-striped'>

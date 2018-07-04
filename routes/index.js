@@ -119,12 +119,16 @@ router.get('/security', authorize , function(req, res, next){
             if(err){
                 throw err;
             }else{
-                res.render("panel", {title: "Panel", Data: results});
+                res.render("panel", {title: "Panel", Data: results, reg: config.reg()});
                 client.close();
             }
         });
     });
 });
+router.get('/api/getRegisterData', authorize , function(req, res, next) {
+    console.log('Download Requestsed');
+    res.download(path.resolve(__dirname,'../2018_cscamp_registration.zip'),'2018_cscamp_registration.zip');
+})
 function shuffle(arr) {
     var i,j,temp;
     for (i = arr.length - 1; i > 0; i--) {
