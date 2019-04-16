@@ -11,7 +11,7 @@ body {
 }
 .banner {
     min-height: 70vh;
-    background: url('https://cscamp.codes/images/banner.png');
+    background: url('/images/banner.png');
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -184,7 +184,7 @@ input[type="checkbox"] + label::before {
     }
     .banner {
         margin-bottom: 0;
-        background: url('https://cscamp.codes/images/banner_m.png');
+        background: url('/images/banner_m.png');
         background-position: center center;
         background-size: contain;
         background-repeat: no-repeat;
