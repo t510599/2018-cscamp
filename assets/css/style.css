@@ -78,6 +78,7 @@ body {
 }
 .image.right img, .image.left img {
     max-height: 240px;
+    width: auto;
 }
 #crew ~ section {
     padding: 1em 0;
